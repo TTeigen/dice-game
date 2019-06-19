@@ -58,12 +58,58 @@ function countDice() {
   }
   return playerRoll
 }
-
-
-
-
-
-
+function math(tally) {
+  tally = tally
+  counter = 0;
+ for (var property1 in tally) {
+   counter++;
+   console.log(counter);
+   console.log(property1);
+   if (property1 == 1) {
+     if (counter ==1) {
+       total += 100;
+     } else if (counter ==5) {
+       total += 50;
+     } else {
+       alert ("invalid single");
+     }
+   }
+   if (property1 == 2) {
+     if (counter ==1) {
+       total += 200;
+     } else if (counter ==5) {
+       total += 100;
+     } else {
+       alert ("invalid single");
+     }
+   }
+   if (property1 == 3) {
+     if (counter == 1) {
+       total+= 1000;
+     } else {
+       total += counter*100
+     }
+   }
+   if (property1 == 4) {
+     if (counter == 1) {
+       total+= 2000;
+     } else {
+       total += counter*200
+     }
+   }
+   if (property1 == 5) {
+     if (counter == 1) {
+       total+= 3000;
+     } else {
+       total += counter*400
+     }
+   }
+   if (property1 == 6) {
+    alert ("Cannot have 6 of a kind, return 1 die.")
+   }
+ }
+ return total;
+ console.log(tally);
 }
 
 
@@ -113,8 +159,9 @@ function countDice() {
         }
       }
       tally = countDice(savedDice);
-      roundTotal = addScore(tally);
+      roundTotal = math(tally)
       console.log(tally);
+      console.log(roundTotal);
     });
   })
 
