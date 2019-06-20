@@ -167,6 +167,7 @@ $(".player").submit(function(event){
   $("#bank").text(points);
   $("#p1total").text(player1.total);
   $("#p2total").text(player2.total);
+  $(".p1").addClass("border");
 })
 //casts inital pool of dice for the active player
   $("#cast").click(function(){
@@ -208,6 +209,14 @@ $(".player").submit(function(event){
    player1.makeActive();
    player2.makeActive();
    points = 0;
+   if (player1.active == true) {
+     $(".p1").addClass("border");
+     $(".p2").removeClass("border");
+   }
+  if (player2.active == true){
+     $(".p2").addClass("border");
+     $(".p1").removeClass("border");
+   }
    $("#bank").text(points);
    $("#p1total").text(player1.total);
    $("#p2total").text(player2.total);
