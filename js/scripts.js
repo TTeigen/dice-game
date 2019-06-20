@@ -34,8 +34,7 @@ Pool.prototype.addToPool = function(die){
   }
 
 var savedDice = [];
-var roundTotal = 0;
-var total = 0;
+let total = 0;
 var tally;
 
 function countDice() {
@@ -58,58 +57,57 @@ function countDice() {
   }
   return playerRoll
 }
-function math(tally) {
-  tally = tally
+function math() {
   counter = 0;
  for (var property1 in tally) {
    counter++;
-   console.log(counter);
-   console.log(property1);
-   if (property1 == 1) {
-     if (counter ==1) {
+   if (tally[property1] === 1) {
+     if (counter == 1) {
        total += 100;
-     } else if (counter ==5) {
+     }
+     if (counter == 5) {
        total += 50;
-     } else {
+     } else if (counter == 2 || counter == 3 || counter == 4 || counter == 6){
        alert ("invalid single");
      }
    }
-   if (property1 == 2) {
-     if (counter ==1) {
+   if (tally[property1] === 2) {
+     if (counter == 1) {
        total += 200;
-     } else if (counter ==5) {
+     } else if (counter == 5) {
        total += 100;
-     } else {
-       alert ("invalid single");
+     } else if (counter == 2 || counter == 3 || counter == 4 || counter == 6){
+       alert ("invalid double");
      }
    }
-   if (property1 == 3) {
+   if (tally[property1] === 3) {
      if (counter == 1) {
        total+= 1000;
      } else {
-       total += counter*100
+       total += counter*100;
      }
    }
-   if (property1 == 4) {
+   if (tally[property1] === 4) {
      if (counter == 1) {
        total+= 2000;
      } else {
-       total += counter*200
+       total += counter*200;
      }
    }
-   if (property1 == 5) {
+   if (tally[property1] === 5) {
      if (counter == 1) {
        total+= 3000;
      } else {
-       total += counter*400
+       total += counter*400;
      }
    }
-   if (property1 == 6) {
+   if (tally[property1] == 6) {
     alert ("Cannot have 6 of a kind, return 1 die.")
    }
+   console.log(counter);
  }
+ console.log(total);
  return total;
- console.log(tally);
 }
 
 
@@ -145,22 +143,29 @@ function math(tally) {
           pool.dice[i].face = die.Roll();
           console.log(pool.dice[i]);
           $("li#"+i).text(pool.dice[i].face)
+        } else if (pool.dice[i].save == true){
+          savedDice.push(pool.dice[i].face)
+          pool.dice[i].save = "scored";
         }
       }
+      console.log(pool);
       console.log(savedDice);
+      tally = countDice(savedDice);
+      var roundTotal = math(tally);
+    console.log(roundTotal);
     })
       //scores saved dice and ends turn
-
     $("#score").click(function(){
+      console.log(pool);
+      savedDice =[];
       for (i=0; i<6; i++) {
-        if (pool.dice[i].save == true){
+         if (pool.dice[i].save == true){
           savedDice.push(pool.dice[i].face)
           pool.dice[i].save = "scored";
         }
       }
       tally = countDice(savedDice);
-      roundTotal = math(tally)
-      console.log(tally);
+      var roundTotal = math(tally);
       console.log(roundTotal);
     });
   })
