@@ -9,8 +9,8 @@
 $(function(){
 
 function Pool(){
-  this.dice =[],
-  this.currentId= 0
+  this.dice =[]
+  this.currentId = 0;
 }
 
 function Die(roll){
@@ -37,6 +37,12 @@ var savedDice = [];
 let total = 0;
 var tally;
 
+
+// check if one + five === 0 || value of each property is < 3
+
+
+
+
 function countDice() {
   let playerRoll = {one: 0, two: 0, three: 0, four: 0, five: 0, six: 0}
   for (let i=0; i < savedDice.length; i++){
@@ -53,9 +59,12 @@ function countDice() {
     }else if (savedDice[i] === 6) {
       playerRoll.six++
     }
-
   }
-  return playerRoll
+  if (playerRoll.one < 1 && playerRoll.five < 1 && playerRoll.two < 3 && playerRoll.three < 3 && playerRoll.four < 3 && playerRoll.six < 3 ) {
+    return false;
+  } else {
+    return playerRoll;
+  }
 }
 function math() {
   counter = 0;
@@ -113,8 +122,8 @@ function math() {
 
     //Initial casting of 6 dice
   $("#cast").click(function(){
+    console.log("tally: " + tally);
     savedDice =[];
-    total = 0;
     var pool = new Pool();
     $("#res").show().empty();
     for(i = 0; i <6; i++) {
@@ -145,13 +154,18 @@ function math() {
           $("li#"+i).text(pool.dice[i].face)
         } else if (pool.dice[i].save == true){
           savedDice.push(pool.dice[i].face)
-          pool.dice[i].save = "scored";
+          pool.dice[i].face = 0;
         }
       }
       console.log(pool);
-      console.log(savedDice);
       tally = countDice(savedDice);
-      var roundTotal = math(tally);
+      if (tally == false) {
+        alert ("you bust");
+        roundTotal = 0
+        console.log(pool);
+      } else {
+        var roundTotal = math(tally);
+      }
     console.log(roundTotal);
     })
       //scores saved dice and ends turn
@@ -161,7 +175,6 @@ function math() {
       for (i=0; i<6; i++) {
          if (pool.dice[i].save == true){
           savedDice.push(pool.dice[i].face)
-          pool.dice[i].save = "scored";
         }
       }
       tally = countDice(savedDice);
