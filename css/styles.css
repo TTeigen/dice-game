@@ -2,3 +2,12 @@
   color: crimson;
   float: right;
 }
+.p1 {
+  background: rgba(100, 0, 0, 0.5);
+}
+.p2 {
+  background: rgba(0, 0, 100, 0.5);
+}
+.points {
+  background: rgba(0, 100, 0, 0.5);
+}

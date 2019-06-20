@@ -13,7 +13,13 @@ var player1;
 var player2;
 
 //Pool objects & prototypes *******
-function Pool (one, two, three, four, five, six) {this.one = 0, this.two = 0, this.three = 0, this.four = 0, this.five = 0, this.six = 0};
+function Pool (one, two, three, four, five, six) {
+  this.one = 0,
+  this.two = 0,
+  this.three = 0,
+  this.four = 0,
+  this.five = 0,
+  this.six = 0};
 
 Pool.prototype.clearPool = function(){
   this.one = 0,
@@ -32,7 +38,6 @@ function Player (name, total) {
   this.active = false
 }
 
-
 Player.prototype.makeActive = function() {
     if (this.active === false) {
       this.active = true;
@@ -41,7 +46,6 @@ Player.prototype.makeActive = function() {
       this.total += points;
     }
 }
-
 //***********************
 
 
@@ -143,6 +147,14 @@ function math(savedPool) {
    console.log("points "+points);
  }
 }
+//conditions for a bust
+function busted() {
+  if (pool.one < 1 && pool.five < 1 && pool.two < 3 && pool.three < 3 && pool.four < 3 && pool.six < 3 ) {
+    alert("YOU BUST!");
+    points = 0;
+    $("#bank").text(points);
+  }
+}
 
 $(".player").submit(function(event){
   event.preventDefault();
@@ -150,31 +162,31 @@ $(".player").submit(function(event){
   player2 = new Player ($("#player2").val(), total)
   player1.active = true;
   players.push(player1, player2);
-  console.log(players);
+  $("#p1name").text($("#player1").val());
+  $("#p2name").text($("#player2").val());
 })
-
-$("#cast").click(function(){
-  $("#res").empty();
-  rollDice();
-  poolDice();
-  for (i=0; i <dice.length ;i++){
-    $("#res").append("<input type='checkbox' value = '"+dice[i]+"'>"+dice[i]);
-  }
-  console.log("castclicked");
-  console.log(pool);
-})
- //when dice are scored splice from pool then reroll values of current pool
+//casts inital pool of dice for the active player
+  $("#cast").click(function(){
+    $("#res").empty();
+    rollDice();
+    poolDice();
+    for (i=0; i <dice.length ;i++){
+      $("#res").append("<input type='checkbox' value = '"+dice[i]+"'>"+dice[i]);
+    }
+    busted(); //checks for bust
+  })
+ //saves and scores selected dice while removing them from the pool
  $("#save").click(function(){
    saved = []
    $("#res input:checked").each(function(){
      saved.push(parseInt($(this).val()));
      dice.splice(0,1);
-     console.log("saveclicked");
    });
    saveDice();
    math(savedPool);
+   $("#bank").text(points);
  })
-
+//rerolls all dice still available in pool
  $("#reroll").click(function(){
    $("#res").empty();
    for (i=0; i < dice.length;i++) {
@@ -183,16 +195,18 @@ $("#cast").click(function(){
      $("#res").append("<input type='checkbox' value = '"+dice[i]+"'>"+dice[i]);
    }
    poolDice();
-   if (pool.one < 1 && pool.five < 1 && pool.two < 3 && pool.three < 3 && pool.four < 3 && pool.six < 3 ) {
-     alert("YOU BUST!");
-     points = 0;
-   }
+   busted(); //checks for bust
  })
+ //ends active player's turn, scores points for the round, activates next player
  $("#turn").click(function(){
    player1.makeActive();
-   console.log(player1);
    player2.makeActive();
-   console.log(player2);
    points = 0;
+   $("#bank").text(points);
+   $("#p1total").text(player1.total);
+   $("#p2total").text(player2.total);
+   if (player1.total >= 2000 || player2.total >= 2000) {
+     alert("You've Done It! You achieved 2000+ points! You an winner! Way Go!");
+   }
  })
 });
