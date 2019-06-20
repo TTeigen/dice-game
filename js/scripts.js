@@ -155,7 +155,7 @@ function busted() {
     $("#bank").text(points);
   }
 }
-
+//creates player objects
 $(".player").submit(function(event){
   event.preventDefault();
   player1 = new Player ($("#player1").val(), total)
@@ -164,6 +164,9 @@ $(".player").submit(function(event){
   players.push(player1, player2);
   $("#p1name").text($("#player1").val());
   $("#p2name").text($("#player2").val());
+  $("#bank").text(points);
+  $("#p1total").text(player1.total);
+  $("#p2total").text(player2.total);
 })
 //casts inital pool of dice for the active player
   $("#cast").click(function(){
@@ -171,9 +174,10 @@ $(".player").submit(function(event){
     rollDice();
     poolDice();
     for (i=0; i <dice.length ;i++){
-      $("#res").append("<input type='checkbox' value = '"+dice[i]+"'>"+dice[i]);
+      $("#res").append("<input type='checkbox' id='checked' value = '"+dice[i]+"'>"+dice[i]);
     }
     busted(); //checks for bust
+    $("#cast").hide();
   })
  //saves and scores selected dice while removing them from the pool
  $("#save").click(function(){
@@ -185,6 +189,7 @@ $(".player").submit(function(event){
    saveDice();
    math(savedPool);
    $("#bank").text(points);
+   $("#save").hide();
  })
 //rerolls all dice still available in pool
  $("#reroll").click(function(){
@@ -196,6 +201,7 @@ $(".player").submit(function(event){
    }
    poolDice();
    busted(); //checks for bust
+   $("#save").show();
  })
  //ends active player's turn, scores points for the round, activates next player
  $("#turn").click(function(){
@@ -208,5 +214,7 @@ $(".player").submit(function(event){
    if (player1.total >= 2000 || player2.total >= 2000) {
      alert("You've Done It! You achieved 2000+ points! You an winner! Way Go!");
    }
+   $("#save").show();
+   $("#cast").show();
  })
 });

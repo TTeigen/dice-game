@@ -1,13 +1,50 @@
-.save {
-  color: crimson;
-  float: right;
+body {
+  background-image: url("tv.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: lavender;
 }
-.p1 {
-  background: rgba(100, 0, 0, 0.5);
+
+#res {
+  font-size: 30px;
 }
-.p2 {
-  background: rgba(0, 0, 100, 0.5);
+input{
+  margin: 40px;
 }
+
 .points {
   background: rgba(0, 100, 0, 0.5);
+  min-height: 200px;
+  margin: auto;
+  text-align: center;
+  max-width: 30%;
 }
+.p1 {
+  flex: 30%;
+  background: rgba(100, 20, 80, 0.5);
+  padding: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: lavender;
+  min-height: 100px;
+  text-align: center;
+}
+.p2 {
+  flex: 30%;
+  background: rgba(20, 20, 100, 0.5);
+  padding: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: lavender;
+  text-align: center;
+  min-height: 100px;
+}
+p {
+  margin-top: 50px;
+  font-size: 50px;
+}
+
+  .row {
+    display: flex;
+    margin-bottom: 80px;
+  }
