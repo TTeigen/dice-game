@@ -3,6 +3,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   color: lavender;
+  font-family: fantasy;
 }
 
 #res {
@@ -48,3 +49,12 @@ p {
     display: flex;
     margin-bottom: 80px;
   }
+.explanation p {
+  font-size: 25px;
+}
+.explanation  {
+  background: rgba(20, 20, 20, 0.3);
+  margin-top: 300px;
+  padding: 20px;
+  font-size: 25px;
+}

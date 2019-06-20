@@ -22,7 +22,7 @@
     </div>
       <button type="button" id="cast">Cast</button>
       <button type="button" id="save">Save</button>
-      <button type="button" id="reroll">reroll</button>
+      <button type="button" id="reroll">Reroll</button>
       <button type="button" id="turn">End Turn</button>
       <div class="points">
         <h1>Points</h1>
@@ -37,6 +37,22 @@
           <h3>Player Two <span id = "p2name"></span></h3>
           <p id="p2total"></p>
         </div>
+      </div>
+      <div class="explanation">
+        <p>The goal of this game is to get 2000 or more points by "saving" certain combinations of dice and banking their corresponding point value.</p>
+        <p>Your turn is bust(over and you gain no points) if none of the following situations apply:</p>
+        <ul>
+          <li>One of the dice is a "1"</li>
+          <li>One of the dice is a "5"</li>
+          <li>At least 3 dice have the same value</li>
+        </ul>
+        <h2>Scoring:</h2>
+        <ul>
+          <li><strong>Singles</strong> a "1" is worth 100 points, a "5" is worth 50</li>
+          <li><strong>3 of a Kind</strong> 3 of any # except "1" is worth 100 x the face value (3 = 300), 1 = 1000</li>
+          <li><strong>3 of a Kind</strong> 3 of any # except "1" is worth 200 x the face value (3 = 600), 1 = 2000</li>
+          <li><strong>3 of a Kind</strong> 3 of any # except "1" is worth 400 x the face value (3 = 1200), 1 = 3000</li>
+        </ul>
       </div>
   </body>
 </html>
